@@ -7,7 +7,7 @@ import re
 import os
 import streamlit as st
 
-api_key = st.secrets.get("GROQ_API_KEY", os.getenv("Groq_Api_Key"))
+api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
 
 load_dotenv()
 Groq_model= os.getenv('Groq_model')
@@ -98,7 +98,7 @@ def data_comprehension(question, context):
 def generate_sql_query(question):
 
     completion = client_sql.chat.completions.create(
-        model= os.environ['Groq_model'],
+        model= os.environ['GROQ_MODEL'],
         temperature= 0.2,
         #max_tokens= 1024,
         messages=[
@@ -132,6 +132,7 @@ if __name__ == "__main__":
 
     #query= "SELECT * from product where brand LIKE '%nike'"
     #df= run_query(query)
+
 
 
 
