@@ -7,7 +7,7 @@ import re
 import os
 import streamlit as st
 
-api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
+api_key = st.secrets.get("GROQ_API_KEY", os.getenv("Groq_Api_Key"))
 
 load_dotenv()
 Groq_model= os.getenv('Groq_model')
@@ -132,6 +132,7 @@ if __name__ == "__main__":
 
     #query= "SELECT * from product where brand LIKE '%nike'"
     #df= run_query(query)
+
 
 
 
