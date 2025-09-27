@@ -6,4 +6,5 @@ groq
 semantic-router==0.0.22
 chromadb
 
-sentence_transformers
+sentence-transformers
+
