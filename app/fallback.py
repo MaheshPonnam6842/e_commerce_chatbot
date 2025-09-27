@@ -5,6 +5,7 @@ load_dotenv()
 import streamlit as st
 api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
 fallback_client= Groq(api_key= api_key)
+model_name = st.secrets.get("GROQ_MODEL", os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"))
 fallback_prompt=  """
 You are an e-commerce chatbot. 
 If the user asks something outside of these topics:
@@ -27,7 +28,7 @@ Assistant: "Sorry, I can’t answer that. I can only help with FAQs, product sea
 def fallback_answer(question):
     try:
         completion = fallback_client.chat.completions.create(
-            model=os.environ['GROQ_MODEL'],
+            model=model_name,
             temperature=0.3,  # lower temp for predictable, clear answers
             messages=[
                 {"role": "system", "content": fallback_prompt},
@@ -47,5 +48,6 @@ if __name__ == "__main__":
     response= fallback_answer(question)
 
     print(response)
+
 
 
