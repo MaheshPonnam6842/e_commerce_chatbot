@@ -7,7 +7,7 @@ from groq import Groq
 from dotenv import load_dotenv
 import os
 import streamlit as st
-api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
+api_key = st.secrets.get("GROQ_API_KEY", os.getenv("Groq_Api_Key"))
 load_dotenv()
 
 
@@ -81,3 +81,4 @@ if __name__ == "__main__":
     answer= faq_chain(query)
 
     print(answer)
+
