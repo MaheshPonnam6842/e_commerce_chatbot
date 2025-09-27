@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 import streamlit as st
-api_key = st.secrets.get("GROQ_API_KEY", os.getenv("Groq_Api_Key"))
+api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
 small_talk_client= Groq(api_key= api_key)
 def talk(question):
     response= conversation(question)
@@ -37,7 +37,7 @@ Assistant: "See you later! 👋"
 def conversation(question):
 
     completion = small_talk_client.chat.completions.create(
-        model= os.environ['Groq_model'],
+        model= os.environ['GROQ_MODEL'],
         temperature= 0.7,
         messages=[
             {
@@ -58,4 +58,5 @@ if __name__ == "__main__":
     response= talk(question)
 
     print(response)
+
 
