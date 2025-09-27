@@ -5,13 +5,14 @@ from groq import Groq
 from dotenv import load_dotenv
 import re
 import os
+import streamlit as st
 
-
+api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
 
 load_dotenv()
 Groq_model= os.getenv('Groq_model')
 db_path= Path(__file__).parent / "db.sqlite"
-client_sql= Groq()
+client_sql= Groq(api_key= api_key)
 
 sql_prompt = """You are an expert in understanding the database schema and generating SQL queries for a natural language question asked
 pertaining to the data you have. The schema is provided in the schema tags. 
@@ -131,5 +132,6 @@ if __name__ == "__main__":
 
     #query= "SELECT * from product where brand LIKE '%nike'"
     #df= run_query(query)
+
 
 
