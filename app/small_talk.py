@@ -2,8 +2,9 @@ from groq import Groq
 from dotenv import load_dotenv
 import os
 load_dotenv()
-
-small_talk_client= Groq()
+import streamlit as st
+api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
+small_talk_client= Groq(api_key= api_key)
 def talk(question):
     response= conversation(question)
     return response
@@ -55,4 +56,5 @@ def conversation(question):
 if __name__ == "__main__":
     question= "How is you're day"
     response= talk(question)
+
     print(response)
