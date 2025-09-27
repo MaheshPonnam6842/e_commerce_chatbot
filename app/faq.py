@@ -7,7 +7,7 @@ from groq import Groq
 from dotenv import load_dotenv
 import os
 import streamlit as st
-api_key = st.secrets.get("GROQ_API_KEY", os.getenv("Groq_Api_Key"))
+api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
 load_dotenv()
 
 
@@ -62,7 +62,7 @@ def generate_answer(query,context):
     Context: {context}'''
 
     completion = groq_client.chat.completions.create(
-        model= os.environ['Groq_model'],
+        model= os.environ['GROQ_MODEL'],
         messages=[
             {
                 "role": "user",
@@ -81,4 +81,5 @@ if __name__ == "__main__":
     answer= faq_chain(query)
 
     print(answer)
+
 
