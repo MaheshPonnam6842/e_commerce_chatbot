@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 import streamlit as st
-api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
+api_key = st.secrets.get("GROQ_API_KEY", os.getenv("Groq_Api_Key"))
 small_talk_client= Groq(api_key= api_key)
 def talk(question):
     response= conversation(question)
@@ -58,3 +58,4 @@ if __name__ == "__main__":
     response= talk(question)
 
     print(response)
+
