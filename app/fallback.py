@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 import streamlit as st
-api_key = st.secrets.get("GROQ_API_KEY", os.getenv("Groq_Api_Key"))
+api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
 fallback_client= Groq(api_key= api_key)
 fallback_prompt=  """
 You are an e-commerce chatbot. 
@@ -27,7 +27,7 @@ Assistant: "Sorry, I can’t answer that. I can only help with FAQs, product sea
 def fallback_answer(question):
     try:
         completion = fallback_client.chat.completions.create(
-            model=os.environ['Groq_model'],
+            model=os.environ['GROQ_MODEL'],
             temperature=0.3,  # lower temp for predictable, clear answers
             messages=[
                 {"role": "system", "content": fallback_prompt},
@@ -47,4 +47,5 @@ if __name__ == "__main__":
     response= fallback_answer(question)
 
     print(response)
+
 
