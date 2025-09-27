@@ -6,7 +6,8 @@ from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunct
 from groq import Groq
 from dotenv import load_dotenv
 import os
-
+import streamlit as st
+api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
 load_dotenv()
 
 
@@ -14,7 +15,7 @@ faq_path = Path(__file__).parent / "resources" / "faq_data.csv"
 chroma_client = chromadb.Client()
 collection_name = "faqs"
 ef = SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
-groq_client= Groq()
+groq_client= Groq(api_key= api_key)
 
 def ingest_faq_data(path):
     if collection_name not in [c.name for c in chroma_client.list_collections()]:
@@ -78,4 +79,5 @@ if __name__ == "__main__":
     query = "What is your policy on defective products"
     #result = get_relevant_qa(query)
     answer= faq_chain(query)
+
     print(answer)
