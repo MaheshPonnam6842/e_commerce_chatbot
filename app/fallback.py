@@ -2,8 +2,9 @@ from groq import Groq
 from dotenv import load_dotenv
 import os
 load_dotenv()
-
-fallback_client= Groq()
+import streamlit as st
+api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
+fallback_client= Groq(api_key= api_key)
 fallback_prompt=  """
 You are an e-commerce chatbot. 
 If the user asks something outside of these topics:
@@ -44,4 +45,5 @@ def fallback_answer(question):
 if __name__ == "__main__":
     question= "Can you sing"
     response= fallback_answer(question)
+
     print(response)
